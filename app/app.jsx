@@ -8,4 +8,4 @@ require('style!css!sass!applicationStyles')
 var TodoApp = require('TodoApp');
 
 ReactDOM.render(
-   <p> <TodoApp /></p>, document.getElementById('app'));
+   <TodoApp />, document.getElementById('app'));
