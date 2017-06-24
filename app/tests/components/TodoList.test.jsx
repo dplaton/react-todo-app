@@ -12,12 +12,16 @@ describe('TodoList', () => {
         expect(TodoList).toExist();
     });
 
-    it('should render one Todo component for each to-do item', ()=>{ 
-        var items = [{
-            id:1, text: 'Test 1'
-        },{
-            id:2, text: 'Test 2'
-        }]
+    it('should render one Todo component for each to-do item', () => {
+        var items = [
+            {
+                id: 1,
+                text: 'Test 1'
+            }, {
+                id: 2,
+                text: 'Test 2'
+            }
+        ]
 
         var todoList = TestUtils.renderIntoDocument(<TodoList todos={items}/>);
         var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
@@ -25,5 +29,13 @@ describe('TodoList', () => {
         expect(todoComponents.length).toBe(items.length);
 
     });
-})
+    it('should render emtpy message if no todos are found', () => {
+        var items = []
 
+        var todoList = TestUtils.renderIntoDocument(<TodoList todos={items}/>);
+        var $el = $(ReactDOM.findDOMNode(todoList));
+
+        expect($el.find('.container__message').length).toBe(1);
+
+    });
+})

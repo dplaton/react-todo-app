@@ -17,7 +17,7 @@ var TodoApp = React.createClass({
         }
     },
 
-    componentDidUpdate: function() {
+    componentDidUpdate: function () {
         TodoApi.setTodos(this.state.todos);
     },
 
@@ -29,7 +29,7 @@ var TodoApp = React.createClass({
                     text: todo,
                     completed: false,
                     createdAt: moment().unix(),
-                    completedAt: undefined 
+                    completedAt: undefined
                 }
             ]
         })
@@ -49,13 +49,15 @@ var TodoApp = React.createClass({
             .map((todo) => {
                 if (todo.id === todoId) {
                     todo.completed = !todo.completed;
-                    todo.completedAt = todo.completed ? moment().unix() : undefined;
+                    todo.completedAt = todo.completed
+                        ? moment().unix()
+                        : undefined;
                 }
-                
+
                 return todo;
             });
 
-        this.setState({todos:updatedTodos})
+        this.setState({todos: updatedTodos})
     },
 
     render: function () {
@@ -64,12 +66,18 @@ var TodoApp = React.createClass({
 
         return (
             <div>
-                <Search onSearch={this.handleSearch}/>
-                <TodoList todos={filteredTodos} onToggleTask={this.handleToggleTaskStatus}/>
-                <AddTodo onAddTodo={this.handleAddTodo}/>
+                <h1 className="page-title">Todo App</h1>
+                <div className="row">
+                    <div className="column small-centered small-11 medium-6 large-5">
+                        <div className="container">
+                            <Search onSearch={this.handleSearch}/>
+                            <TodoList todos={filteredTodos} onToggleTask={this.handleToggleTaskStatus}/>
+                            <AddTodo onAddTodo={this.handleAddTodo}/>
+                        </div>
+                    </div>
+                </div>
             </div>
-        )
-    }
+        )}
 });
 
-module.exports = TodoApp;
+module.exports=TodoApp;

@@ -44,6 +44,13 @@ describe('TodoApp', () => {
         
         todoApp.handleAddTodo('test');
         var todo = todoApp.state.todos[0];
+
+        todoApp.handleToggleTaskStatus(todo.id);
+        todoApp.handleToggleTaskStatus(todo.id);
+
+        expect(todo.createdAt).toBeA('number');
+        expect(todo.completedAt).toNotExist();
+        
     });
 })
 
