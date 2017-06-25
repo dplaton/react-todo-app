@@ -41,15 +41,16 @@ describe('TodoApp', () => {
 
     it('should revert back to createdAt when status becomes not done', () => {
         var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-        
+        todoApp.setState({todos:[]});   
+
         todoApp.handleAddTodo('test');
         var todo = todoApp.state.todos[0];
 
+        todoApp.handleToggleTaskStatus(todo.id); 
         todoApp.handleToggleTaskStatus(todo.id);
-        todoApp.handleToggleTaskStatus(todo.id);
-
-        expect(todo.createdAt).toBeA('number');
-        expect(todo.completedAt).toNotExist();
+        
+        expect(todoApp.state.todos[0].createdAt).toBeA('number');
+        expect(todoApp.state.todos[0].completedAt).toNotExist();
         
     });
 })
