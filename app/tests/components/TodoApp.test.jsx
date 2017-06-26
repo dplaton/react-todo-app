@@ -4,54 +4,30 @@ var expect = require('expect');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 var uuid = require('node-uuid');
+var {Provider} = require('react-redux');
+
+
+var configureStore = require('configureStore');
+import TodoList from 'TodoList'
 var TodoApp = require('TodoApp');
 
 describe('TodoApp', () => {
     it('should exist', () => {
         expect(TodoApp).toExist();
+    });
+
+    it('should render TodoList', () => {
+        var store = configureStore.configure();
+        var provider = TestUtils.renderIntoDocument(
+            <Provider store = {store}>
+                <TodoApp />
+            </Provider>
+        );
+
+        var todoApp = TestUtils.scryRenderedComponentsWithType(provider, TodoApp)[0];
+        var todoList = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList);
+
+        expect(todoList.length).toEqual(1);
     })
-
-    it('should add todo on handleAddTodo', () => {
-        var todoText = 'one';
-
-        var todoApp = TestUtils.renderIntoDocument(<TodoApp/>);
-        todoApp.setState({todos:[]});
-
-        todoApp.handleAddTodo(todoText);
-
-        expect(todoApp.state.todos.length).toBe(1);
-        expect(todoApp.state.todos[0].text).toBe(todoText);
-        expect(todoApp.state.todos[0].createdAt).toBeA('number');
-    });
-
-    it('should toggle completed value when handler is called', () => {
-        var todoData = {
-            id:uuid(),
-            text: 'Test',
-            completed: false
-        };
-
-        var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-        todoApp.setState({todos: [todoData]});
-
-        todoApp.handleToggleTaskStatus(todoData.id);
-        expect(todoData.completed).toBe(true);
-        expect(todoData.completedAt).toBeA('number');
-    });
-
-    it('should revert back to createdAt when status becomes not done', () => {
-        var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-        todoApp.setState({todos:[]});   
-
-        todoApp.handleAddTodo('test');
-        var todo = todoApp.state.todos[0];
-
-        todoApp.handleToggleTaskStatus(todo.id); 
-        todoApp.handleToggleTaskStatus(todo.id);
-        
-        expect(todoApp.state.todos[0].createdAt).toBeA('number');
-        expect(todoApp.state.todos[0].completedAt).toNotExist();
-        
-    });
 })
 

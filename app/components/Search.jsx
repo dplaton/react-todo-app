@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Search = React.createClass({
+export var Search = React.createClass({
     
     handleSearch: function() {
         var showCompleted = this.refs.showCompleted.checked;

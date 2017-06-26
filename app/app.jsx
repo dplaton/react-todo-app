@@ -1,7 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var {Provider} = require('react-redux');
 
-$(document).foundation();   
+$(document).foundation();
 
 require('style!css!sass!applicationStyles')
 
@@ -18,4 +19,7 @@ store.dispatch(actions.setSearchTerm('test'));
 store.dispatch(actions.toggleShowCompleted());
 
 ReactDOM.render(
-   <TodoApp />, document.getElementById('app'));
+    <Provider store={store}>
+        <TodoApp/>
+    </Provider>, 
+document.getElementById('app'));
