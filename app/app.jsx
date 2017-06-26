@@ -11,11 +11,10 @@ var actions = require('actions');
 var store = require('configureStore').configure();
 
 store.subscribe(() => {
-    console.log('New state ', store.getState());
+    //console.log('New state ', store.getState());
 })
 
 store.dispatch(actions.addTodo('Something'));
-store.dispatch(actions.setSearchTerm('test'));
 store.dispatch(actions.toggleShowCompleted());
 
 ReactDOM.render(

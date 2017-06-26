@@ -4,8 +4,8 @@ var {searchText, toggleShowCompleted, todosReducer} = require('reducers');
 export var configure = (initialState = {}) => {
     // for each store property specify which reducer handles it
     var reducer = redux.combineReducers({
-        searchText,
-        toggleShowCompleted,
+        searchTerm: searchText,
+        showCompleted:toggleShowCompleted,
         todos:todosReducer
     });
 
