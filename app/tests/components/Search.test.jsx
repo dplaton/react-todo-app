@@ -21,7 +21,7 @@ describe('Search', () => {
         TestUtils.Simulate.change(todoSearch.refs.searchTerm);
 
         expect(spy).toHaveBeenCalledWith({
-            type:'SET_SEARCH_TEXT',
+            type:'SET_SEARCH_TERM',
             searchTerm: searchTerm
         });
 
@@ -33,7 +33,7 @@ describe('Search', () => {
         var todoSearch = TestUtils.renderIntoDocument(<Search dispatch={spy}/>);
 
         todoSearch.refs.showCompleted.checked = true;
-        TestUtils.Simulate.change(todoSearch.refs.searchTerm);
+        TestUtils.Simulate.change(todoSearch.refs.showCompleted);
 
         expect(spy).toHaveBeenCalledWith({
             type:'TOGGLE_SHOW_COMPLETED'
