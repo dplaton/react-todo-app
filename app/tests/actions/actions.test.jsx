@@ -72,6 +72,7 @@ describe('Actions', () => {
 
         expect(actualAction).toEqual(expectedAction);
     });
+    
     it('should generate the "add todos" action', () => {
         var expectedAction = {
             type: 'ADD_TODOS',
