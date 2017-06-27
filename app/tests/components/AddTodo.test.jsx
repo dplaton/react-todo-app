@@ -5,6 +5,7 @@ var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 
 var {AddTodo} = require('AddTodo');
+import * as actions from 'actions'
 
 describe('AddTodo', () => {
     it ('should exist', ()=> {
@@ -15,15 +16,13 @@ describe('AddTodo', () => {
         var spy = expect.createSpy();
         var mockData = 'one';
         var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
+        var action = actions.startAddTodo(mockData);
 
         var $el = $(ReactDOM.findDOMNode(addTodo));
         addTodo.refs.todo.value = mockData;
         TestUtils.Simulate.submit($el.find("form")[0]);
 
-        expect(spy).toHaveBeenCalledWith({
-            type:'ADD_TODO',
-            text: mockData
-        });
+        expect(spy).toHaveBeenCalledWith(action);
     });
 
     it('should not call the handler when invalid data is entered', () => {

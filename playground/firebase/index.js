@@ -1,15 +1,37 @@
-import Firebase from 'firebase'
 
- var config = {
-    apiKey: "AIzaSyD3Tr-XEWUNvu-81xUajVfZ8qxcTjhedBQ",
-    authDomain: "dplaton-todo-app.firebaseapp.com",
-    databaseURL: "https://dplaton-todo-app.firebaseio.com",
-    projectId: "dplaton-todo-app",
-    storageBucket: "dplaton-todo-app.appspot.com",
-    messagingSenderId: "965654118899"
-  };
-  firebase.initializeApp(config);
 
-firebase.database().ref().set({
-    name:'React TODO App'
+firebaseRef.set({
+  app: {
+    name: 'React TODO App',
+    version: '0.9'
+  },
+  isRunning: true,
+  user: {
+    name: 'Tom',
+    age: 6
+  }
+});
+
+var notesRef = firebaseRef.child('notes');
+
+
+notesRef.on('child_added', (snapshot) => {
+  console.log('Child added: ', snapshot.key, snapshot.val());
+})
+
+notesRef.on('child_changed', (snapshot) => {
+  console.log('Child changed: ', snapshot.key, snapshot.val());
+})
+
+notesRef.on('child_removed', (snapshot) => {
+  console.log('Child removed: ', snapshot.key, snapshot.val());
+})
+
+var newNoteRef = notesRef.push();
+newNoteRef.set({
+  text: 'Something'
+})
+
+newNoteRef = notesRef.push({
+  text: 'Do something!'
 })
