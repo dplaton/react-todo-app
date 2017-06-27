@@ -42,4 +42,14 @@ describe('Actions', () => {
 
         expect(actualAction).toEqual(expectedAction);
     });
+     it('should generate the "add todos" action', () => {
+        var expectedAction = {
+            type: 'ADD_TODOS',
+            todos:[1,2,3]
+        }
+
+        var actualAction = actions.addTodos([1,2,3]);
+
+        expect(actualAction).toEqual(expectedAction);
+    });
 })

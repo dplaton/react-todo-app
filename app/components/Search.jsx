@@ -10,14 +10,16 @@ export var Search = React.createClass({
             <div className="container__header">
                 <div>
                     <input type="search" ref="searchTerm" placeholder="Search for tasks" value={searchTerm} onChange={()=>{
-                        var searchTerm=this.refs.searchTerm.value;
+                        var searchTerm=this.refs.searchTerm.value; 
                         dispatch(actions.setSearchTerm(searchTerm))
                     }}/>
                 </div>
                 <div>
                     <label>
                         <input type="checkbox" checked={showCompleted} ref="showCompleted" onChange={()=>{
-                            dispatch(actions.toggleShowCompleted());
+                            var action = actions.toggleShowCompleted();
+                            console.log('Action is ', action);
+                            dispatch(action);
                         }}/>
                         Show completed tasks
                     </label>

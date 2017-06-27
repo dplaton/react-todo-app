@@ -21,29 +21,42 @@ export var toggleShowCompleted = (state = false, action) => {
 
 export var todosReducer = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_TODO': {
-            return [...state, {
-                id: uuid(),
-                text: action.text,
-                completed: false,
-                createdAt: moment().unix(),
-                completedAt: undefined
-            }];
-        }
-        case 'TOGGLE_TODO': {
-            return state.map((todo) => {
-                var nextCompleted = !todo.completed;
-                if (todo.id == action.id) {
-                    return {
-                        ...todo,
-                        completed: nextCompleted,
-                        completedAt: nextCompleted ? moment().unix() : undefined
+        case 'ADD_TODO':
+            {
+                return [
+                    ...state, {
+                        id: uuid(),
+                        text: action.text,
+                        completed: false,
+                        createdAt: moment().unix(),
+                        completedAt: undefined
                     }
-                } else {
-                    return todo;
-                }
-            })
-        }
+                ];
+            }
+        case 'TOGGLE_TODO':
+            {
+                return state.map((todo) => {
+                    var nextCompleted = !todo.completed;
+                    if (todo.id == action.id) {
+                        return {
+                            ...todo,
+                            completed: nextCompleted,
+                            completedAt: nextCompleted
+                                ? moment().unix()
+                                : undefined
+                        }
+                    } else {
+                        return todo;
+                    }
+                })
+            }
+        case 'ADD_TODOS':
+            {
+                return [
+                    ...state,
+                    ...action.todos
+                ]
+            }
         default:
             return state
     }
