@@ -6,7 +6,7 @@
     "repository": "http://github.com/dplaton/react-todo-app",
     "scripts": {
         "test": "NODE_ENV=test karma start",
-        "build": "webpack",
+        "build": "npm rebuild node-sass && webpack",
         "postinstall": "npm run build",
         "start": "node server.js"
     },
