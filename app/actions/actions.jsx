@@ -68,3 +68,21 @@ export var addTodos = (todos = []) => {
         todos
     }
 }
+
+export var startAddTodos = () => {
+    return (dispatch, getState) => {
+        var todosRef = firebaseRef.child('todos');
+        return todosRef.once('value').then((snapshot) => {
+            var todos = snapshot.val() || {};
+            var localTodos = [];
+
+            Object.keys(todos).forEach( (todoId) => {
+                localTodos.push({
+                    id: todoId,
+                    ...todos[todoId]
+                });
+            });
+            dispatch(addTodos(localTodos));
+        });
+    }
+}

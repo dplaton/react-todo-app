@@ -8,10 +8,12 @@ export var TodoList = React.createClass({
     render: function() {
         var {todos, showCompleted, searchTerm} = this.props;
         var renderTodos = () => {
-            if (todos.length == 0) {
+            var filteredTodos = TodoApi.filterTodos(todos,showCompleted, searchTerm);
+            if (filteredTodos.length == 0) {
                 return <p className="container__message">Nothing to do!</p>
-            }
-            return TodoApi.filterTodos(todos,showCompleted, searchTerm).map((todo)=> {
+            } 
+            
+            return filteredTodos.map((todo)=> {
                return <Todo key={todo.id} {...todo}  />
             });
         }
@@ -25,7 +27,6 @@ export var TodoList = React.createClass({
 
 export default connect(
     (state) => {
-        console.log('State is ', state)
         return state;
     }
 )(TodoList);
