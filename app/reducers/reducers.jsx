@@ -48,6 +48,11 @@ export var todosReducer = (state = [], action) => {
                     ...action.todos
                 ]
             }
+        // by naming this action LOGOUT we essentially use the same action as the "logout" one
+        case 'LOGOUT':
+            {
+                return [ ]
+            }
         default:
             return state
     }
