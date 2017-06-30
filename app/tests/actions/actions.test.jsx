@@ -143,5 +143,24 @@ describe('Actions', () => {
             }, done());
             
         });
+
+        it('should generate the LOGIN action', () => {
+            const action = {
+                type:'LOGIN',
+                uid:123
+            }
+
+            var actualAction = actions.login(123);
+            expect(actualAction).toEqual(action)
+        });
+        
+        it('should generate the LOGOUT action', () => {
+            const action = {
+                type:'LOGOUT'
+            }
+
+            var actualAction = actions.logout();
+            expect(actualAction).toEqual(action)
+        });
     })
 })

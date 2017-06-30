@@ -6,8 +6,8 @@ describe('Reducers', () => {
     describe("Search text", () => {
         it('should add the search term to the state', () => {
             var action = {
-                type:'SET_SEARCH_TERM',
-                searchTerm:'test'
+                type: 'SET_SEARCH_TERM',
+                searchTerm: 'test'
             }
 
             var expectedResult = 'test';
@@ -18,9 +18,9 @@ describe('Reducers', () => {
     });
 
     describe('Toggle show completed', () => {
-        it ('should toggle the "Show completed" flag', () => {
+        it('should toggle the "Show completed" flag', () => {
             var action = {
-                type:'TOGGLE_SHOW_COMPLETED'
+                type: 'TOGGLE_SHOW_COMPLETED'
             }
 
             var expectedResult = true;
@@ -31,14 +31,14 @@ describe('Reducers', () => {
     });
 
     describe('Todos reducer', () => {
-        it ('should add a new todo', () => {
+        it('should add a new todo', () => {
             var action = {
                 type: 'ADD_TODO',
                 todo: {
-                    id:'123asv',
-                    text:'test',
-                    completed:false,
-                    createdAt:1112
+                    id: '123asv',
+                    text: 'test',
+                    completed: false,
+                    createdAt: 1112
                 }
             }
             var res = reducers.todosReducer(df([]), df(action));
@@ -46,14 +46,16 @@ describe('Reducers', () => {
             expect(res[0]).toEqual(action.todo);
         });
 
-        it ('should toggle todo status', () => {
-            var todo = [{
-                id:1,
-                text:'test',
-                createdAt: 123,
-                completed:false,
-                completedAt: undefined
-            }]
+        it('should toggle todo status', () => {
+            var todo = [
+                {
+                    id: 1,
+                    text: 'test',
+                    createdAt: 123,
+                    completed: false,
+                    completedAt: undefined
+                }
+            ]
             var updates = {
                 completed: false,
                 completedAt: null
@@ -61,9 +63,7 @@ describe('Reducers', () => {
             var action = {
                 type: 'UPDATE_TODO',
                 id: 1,
-                updates : {
-
-                }
+                updates: {}
             }
 
             var res = reducers.todosReducer(df(todo), df(action));
@@ -73,17 +73,19 @@ describe('Reducers', () => {
         })
 
         it('should add existing todos', () => {
-           
-            var todos = [{
-                id:1,
-                text:'test',
-                createdAt: 123,
-                completed:false,
-                completedAt: undefined
-            }]
+
+            var todos = [
+                {
+                    id: 1,
+                    text: 'test',
+                    createdAt: 123,
+                    completed: false,
+                    completedAt: undefined
+                }
+            ]
 
             var action = {
-                type:'ADD_TODOS',
+                type: 'ADD_TODOS',
                 todos
             }
 
@@ -91,6 +93,32 @@ describe('Reducers', () => {
             expect(res.length).toEqual(todos.length);
             expect(res[0].id).toEqual(todos[0].id);
 
-        })
+        });
+
+        it('should update the auth information upon login', () => {
+            var authState = {
+                uid: 123
+            }
+
+            var action = {
+                type: 'LOGIN',
+                uid: 123
+            }
+
+            var res = reducers.authReducer(undefined, df(action));
+            expect(res).toEqual(authState);
+        });
+
+        it('should update the auth information upon logout', () => {
+            const authData = {
+                uid: 123
+            }
+            var action = {
+                type: 'LOGOUT'
+            }
+
+            var res = reducers.authReducer(df(authData), df(action));
+            expect(res).toEqual({});
+        });
     })
 })
