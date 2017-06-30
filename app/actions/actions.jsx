@@ -1,4 +1,4 @@
-import firebase, { firebaseRef } from 'app/firebase'
+import firebase, {firebaseRef, githubProvider} from 'app/firebase'
 import moment from 'moment'
 
 export var setSearchTerm = (searchTerm) => {
@@ -83,6 +83,24 @@ export var startAddTodos = () => {
                 });
             });
             dispatch(addTodos(localTodos));
+        });
+    }
+}
+
+export var startLogin = () => {
+    return (dispatch, getState) => {
+        return firebase.auth().signInWithPopup(githubProvider).then((result)=>{
+            console.log('It worked ', result);
+        }, (e) => {
+            console.error('It did not work', e);
+        });
+    }
+}
+
+export var startLogout = () => {
+    return (dispatch, getState) => {
+        return firebase.auth().signOut().then(()=> {
+            console.log('Signed out!');
         });
     }
 }
