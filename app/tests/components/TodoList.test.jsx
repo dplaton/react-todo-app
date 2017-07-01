@@ -1,9 +1,9 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var expect = require('expect');
-var $ = require('jQuery');
-var TestUtils = require('react-addons-test-utils');
-var {Provider} = require('react-redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import $ from 'jQuery';
+import TestUtils from  'react-addons-test-utils';
+import {Provider} from 'react-redux';
 
 import {configure} from 'configureStore'
 import ConnectedTodoList, {TodoList} from 'TodoList'
