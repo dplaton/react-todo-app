@@ -3,7 +3,6 @@
 // foundation
 //@import "base/foundation-settings";
 @import "foundation";
-@include foundation-grid;
 @include foundation-everything;
 //Components
 @import "components/callout-auth";
